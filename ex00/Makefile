@@ -16,9 +16,9 @@ HEADERS = Scalar.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-CC = c++ #-std=c++98
+CC = c++ -std=c++98
 
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 

@@ -18,9 +18,7 @@
 #include <cmath>
 #include <cstring>
 #include <iomanip>
-
-#include <limits>
-
+#include <cstdlib>
 
 #define INT_MAX std::numeric_limits<int>::max()
 #define INT_MIN std::numeric_limits<int>::min()
@@ -34,13 +32,8 @@ class ScalarConverter
 {
     private:
         ScalarConverter();
-
-    
     public:
         static void convert(const char *input);
-    
-
-
 
 };
 
