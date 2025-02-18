@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Scalar.hpp                                         :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlamkadm <mlamkadm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 12:56:09 by mlamkadm          #+#    #+#             */
-/*   Updated: 2025/02/17 12:56:09 by mlamkadm         ###   ########.fr       */
+/*   Created: 2025/02/18 13:42:58 by mlamkadm          #+#    #+#             */
+/*   Updated: 2025/02/18 14:09:36 by mlamkadm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALAR_HPP
-#define SCALAR_HPP
+
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <cstring>
-#include <iomanip>
-#include <limits>
-#include <cstdlib>
+#include <stdint.h>
 
-#define INT_MAX std::numeric_limits<int>::max()
-#define INT_MIN std::numeric_limits<int>::min()
-
-#define CHAR_MAX std::numeric_limits<char>::max()
-#define CHAR_MIN std::numeric_limits<char>::min()
-
-
-
-class ScalarConverter
+struct Data // Structure to be serialized
 {
-    private:
-        ScalarConverter();
-    public:
-        static void convert(const char *input);
+    std::string name;
+
+    float x;
+    float y;
+
+    float magnitude;
 
 };
+
+class Serializer
+{
+    public:
+        static uintptr_t serialize(Data* ptr);
+        static Data* deserialize(uintptr_t raw);
+    private:
+        Serializer();
+};
+
+std::ostream & operator<<(std::ostream & o, Data const & rhs);
 
 #endif

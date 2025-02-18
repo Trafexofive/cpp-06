@@ -21,7 +21,7 @@ static void printAllError() {
 
 void ScalarConverter::convert(const char *input) {
 
-    // if the input is one character
+    // if the input is one character char mode
   if (strlen(input) == 1 && !isdigit(input[0])) {
     char c = input[0];
     std::cout << "char: '" << c << "'" << std::endl;
@@ -34,7 +34,7 @@ void ScalarConverter::convert(const char *input) {
 
       double value = std::strtod(input, &end);
 
-      // Check if any conversion was done.
+    // Check if the input is a valid number. Else print all impossible.
       if (*end != '\0') {
         printAllError();
         return;
@@ -42,7 +42,7 @@ void ScalarConverter::convert(const char *input) {
 
       // Converting to char if the value is within range.
       if (value >= CHAR_MIN && value <= CHAR_MAX) {
-        if (std::isprint(static_cast<char>(value)))
+        if (std::isprint(static_cast<char>(value))) // Check if the value is printable
             std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
         else
         std::cout << "char: Non displayable" << std::endl;
