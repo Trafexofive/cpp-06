@@ -18,6 +18,14 @@ static void PrintLine(void)
     std::cout << "===================================================================="<< std::endl;
 }
 
+static void PrintLine(const std::string & str)
+{
+    std::cout << "===================================================================="<< std::endl;
+    std::cout << str << std::endl;
+    std::cout << "===================================================================="<< std::endl;
+}
+
+
 int main (void)
 {
 
