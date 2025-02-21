@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Get the folder number from argument
+# Get the folder number or command from argument
 num=$1
 
-#if arg is clean then clean all
-
+# If arg is "clean" then clean all directories
 if [ "$num" == "clean" ]; then
     for i in {0..9}; do
         cd ex0$i || continue
@@ -14,7 +13,7 @@ if [ "$num" == "clean" ]; then
     exit 0
 fi
 
-
+# If arg is "fclean" then force clean all directories
 if [ "$num" == "fclean" ]; then
     for i in {0..9}; do
         cd ex0$i || continue
@@ -24,25 +23,29 @@ if [ "$num" == "fclean" ]; then
     exit 0
 fi
 
-# Validate input
+# Validate input day number (must be a number between 0 and 9)
 if [[ ! $num =~ ^[0-9]+$ ]] || (( num < 0 || num > 9 )); then
-    echo "Usage: ./make-run [0-9]"
+    echo "Usage: ./make-run.sh [0-9] [optional arguments for main]"
     exit 1
 fi
 
-# Go to exercise directory
+# Remove the day number argument so that remaining parameters are passed to main
+shift
+
+# Change to the corresponding exercise directory
 cd ex$num || exit 1
 
-# Make clean first
+# Run make clean once before compiling (ignore error if it fails)
 make clean || true
 
-# Compile
+# Compile the program
 make || exit 1
 
-# Run the program
-./main || exit 1
+# Run the program with any additional arguments
+./main "$@" || exit 1
 
+# Clean up after execution
 make clean
 
-# Go back to original directory
+# Return to the original directory
 cd ..
